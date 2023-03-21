@@ -1,6 +1,6 @@
 # CVPR2023_STSSL
 
-Code for STSSL
+Code for CVPR2023_STSSL
 
 The paper is "Spatiotemporal Self-supervised Learning for Point Clouds in the Wild".
 
