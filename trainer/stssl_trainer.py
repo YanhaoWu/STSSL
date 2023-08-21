@@ -241,7 +241,7 @@ class SemanticKITTITrainer(pl.LightningModule):
         print("get opt")
         # define optimizers
         optimizer = torch.optim.SGD(self.train_model.parameters(), lr=self.params.lr, momentum=0.9, weight_decay=self.params.decay_lr, nesterov=True)
-        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, self.params.epochs, eta_min=self.params.lr / 1000)
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, self.params.stop_epoch, eta_min=self.params.lr / 1000)
 
         self.optimizer = optimizer
         self.scheduler = scheduler
