@@ -1,7 +1,69 @@
-# CVPR2023_STSSL
+STSSL
 
-Code for CVPR2023_STSSL
+**[Paper](https://arxiv.org/pdf/2303.16235.pdf)** **|** **[Project page](https://yanhaowu.github.io/STSSL/)**
 
-The paper is "Spatiotemporal Self-supervised Learning for Point Clouds in the Wild".
+![](pics/poster.png)
 
-Our code is coming soon. It will not be a long time : )
+
+Our project is built based on **[SegContrast](https://github.com/PRBonn/segcontrast)**
+
+Installing pre-requisites:
+
+`sudo apt install build-essential python3-dev libopenblas-dev`
+
+`pip3 install -r requirements.txt`
+
+`pip3 install torch ninja`
+
+Installing MinkowskiEngine with CUDA support:
+
+`pip3 install -U MinkowskiEngine==0.5.4 --install-option="--blas=openblas" -v --no-deps`
+
+
+# Data Preparation
+
+Download [KITTI](http://www.semantic-kitti.org/dataset.html#download) inside the directory ```your config.dataset_path/datasets```. The directory structure should be:
+
+```
+ ── your config.dataset_path/
+    └── dataset
+        └── sequences
+        ├── 00/           
+        │   ├── velodyne/	
+        |   |	├── 000000.bin
+        |   |	├── 000001.bin
+        |   |	└── ...
+        │   └── labels/ 
+        |       ├── 000000.label
+        |       ├── 000001.label
+        |       └── ...
+        ├── 08/ # for validation
+        ├── 11/ # 11-21 for testing
+        └── 21/
+            └── ...
+```
+
+
+# Reproducing the results
+
+for pre-training
+
+you can just run train_stssl.py which is in tools, remember to modify the paramters of path :) 
+
+Then for fine-tuning:
+
+you can refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
+
+# Citation
+
+If you use this repo, please cite as :
+
+```
+@inproceedings{wu2023spatiotemporal,
+  title={Spatiotemporal Self-supervised Learning for Point Clouds in the Wild},
+  author={Wu, Yanhao and Zhang, Tong and Ke, Wei and S{\"u}sstrunk, Sabine and Salzmann, Mathieu},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={5251--5260},
+  year={2023}
+}
+```
