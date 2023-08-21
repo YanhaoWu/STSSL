@@ -1,8 +1,16 @@
-*-----------------------------------------------------------------------------------*\
-Update 19:56 8.21 2023 \
-Code is released, modify the 'epochs' to 'stop_epoch' in trainer.stssl_trainer \
-*-----------------------------------------------------------------------------------* \
-STSSL
+*-----------------------------------------------------------------------------------*
+
+
+Update 19:56 8.21 2023 
+
+
+Code is released, modify the 'epochs' to 'stop_epoch' in trainer.stssl_trainer 
+
+
+*-----------------------------------------------------------------------------------* 
+
+
+**STSSL**
 
 **[Paper](https://arxiv.org/pdf/2303.16235.pdf)** **|** **[Project page](https://yanhaowu.github.io/STSSL/)**
 
