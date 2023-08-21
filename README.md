@@ -64,7 +64,11 @@ you can just run train_stssl.py which is in tools, remember to modify the paramt
 
 Then for fine-tuning:
 
-you can refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
+I will update fine-tune part as soon as possible.
+
+Before that, you can refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
+
+
 
 # Citation
 
