@@ -1,6 +1,7 @@
 import numpy as np
-from data_utils.collations import SparseSegmentsCollation, SparseSegmentWithTrackCollation
+from data_utils.collations import SparseSegmentsCollation, SparseSegmentWithTrackCollation, SparseCollation
 from data_utils.datasets.SemanticKITTIDataLoader import SemanticKITTIDataLoader
+
 from models.minkunet import *
 from models.byol_pix import *
 from models.blocks import ProjectionHead, SegmentationClassifierHead, PredictionHead
@@ -70,22 +71,48 @@ def get_class_weights(dataset):
 def write_summary(writer, summary_id, report, epoch):
     writer.add_scalar(summary_id, report, epoch)
 
-def get_dataset(args,):
-    data_train = data_loaders[args.dataset_name](split='train',intensity_channel=args.use_intensity,resolution=args.sparse_resolution,args=args)
-    return data_train
-
-def get_data_loader(data_train, args, pin_memory=True):
-    if args.stage==0:
-        collate_fn = SparseSegmentsCollation(args.sparse_resolution, args.num_points)
+def get_dataset(args, pre_training=True):
+    if pre_training:
+      data_train = data_loaders[args.dataset_name](split='train',intensity_channel=args.use_intensity,resolution=args.sparse_resolution,args=args)
+      return data_train
     else:
-        collate_fn = SparseSegmentWithTrackCollation(args.sparse_resolution, args.num_points)
+      data_train = data_loaders[args.dataset_name](split='train', percentage=args.percentage_labels, intensity_channel=args.use_intensity, resolution=args.sparse_resolution,args=args, pretraining=False)
+      data_test = data_loaders[args.dataset_name](split='validation', percentage=args.percentage_labels, intensity_channel=args.use_intensity, resolution=args.sparse_resolution,args=args, pretraining=False)
+      return data_train, data_test
 
-    train_loader = torch.utils.data.DataLoader(
-        data_train,
-        batch_size=args.batch_size,
-        collate_fn=collate_fn,
-        shuffle=True,
-        num_workers=args.num_workers,
-        pin_memory=pin_memory
-    )
-    return train_loader
+
+
+
+
+
+def get_data_loader(data_train, args, pin_memory=False, pre_training=True):
+    if pre_training:
+      
+      if args.stage==0:
+          collate_fn = SparseSegmentsCollation(args.sparse_resolution, args.num_points)
+      else:
+          collate_fn = SparseSegmentWithTrackCollation(args.sparse_resolution, args.num_points)
+
+      train_loader = torch.utils.data.DataLoader(
+          data_train,
+          batch_size=args.batch_size,
+          collate_fn=collate_fn,
+          shuffle=True,
+          num_workers=args.num_workers,
+          pin_memory=pin_memory
+      )
+      return train_loader
+    
+    else:
+      
+      collate_fn = SparseCollation(args.sparse_resolution, args.num_points)
+      train_loader = torch.utils.data.DataLoader(
+          data_train,
+          batch_size=args.batch_size,
+          collate_fn=collate_fn,
+          shuffle=True,
+          num_workers=args.num_workers,
+          pin_memory=pin_memory
+      )
+      return train_loader
+    

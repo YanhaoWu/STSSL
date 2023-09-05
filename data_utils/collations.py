@@ -218,40 +218,34 @@ class SparseSegmentsCollation:
       
       
       
-class SparseCollationWithClusterinfo:
-  def __init__(self, resolution, num_points=80000):
-      self.resolution = resolution
-      self.num_points = num_points
+class SparseCollation:
+    def __init__(self, resolution, num_points=80000):
+        self.resolution = resolution
+        self.num_points = num_points
 
-  def __call__(self, points_set):
-      points_set, labels = points_set[:,:4],  points_set[:,-1]
+    def __call__(self, list_data):
+        points_set, labels = list(zip(*list_data))
 
-      points_set = np.asarray(points_set)
-      labels = np.asarray(labels)
+        points_set = np.asarray(points_set)
+        labels = np.asarray(labels)
 
-      points_set = points_set[np.newaxis,:]
-      labels = labels.reshape(-1, 1)
-      labels = labels[np.newaxis, :]
-      p_feats = []
-      p_coord = []
-      p_label = []
-      for points, label in zip(points_set, labels):
-          coord, feats, label_ = point_set_to_coord_feats(points, label, self.resolution, self.num_points, True)
-          p_feats.append(feats)
-          p_coord.append(coord)
-          p_label.append(label_)
+        p_feats = []
+        p_coord = []
+        p_label = []
+        for points, label in zip(points_set, labels):
+            coord, feats, label_ = point_set_to_coord_feats(points, label, self.resolution, self.num_points, True)
+            p_feats.append(feats)
+            p_coord.append(coord)
+            p_label.append(label_)
 
-      p_feats = np.asarray(p_feats)
-      p_coord = np.asarray(p_coord)
-      p_label = np.asarray(p_label)
+        p_feats = np.asarray(p_feats)
+        p_coord = np.asarray(p_coord)
+        p_label = np.asarray(p_label)
 
-      # if we directly map coords and feats to SparseTensor it will loose the map over the coordinates
-      # if the mapping between point and voxels are necessary, please use TensorField
-      # as in https://nvidia.github.io/MinkowskiEngine/demo/segmentation.html?highlight=segmentation
-      # we first create TensorFields and from it we create the sparse tensors, so we can map the coordinate
-      # features across different SparseTensors, i.e. output prediction and target labels
+        # if we directly map coords and feats to SparseTensor it will loose the map over the coordinates
+        # if the mapping between point and voxels are necessary, please use TensorField
+        # as in https://nvidia.github.io/MinkowskiEngine/demo/segmentation.html?highlight=segmentation
+        # we first create TensorFields and from it we create the sparse tensors, so we can map the coordinate
+        # features across different SparseTensors, i.e. output prediction and target labels
 
-      return p_coord, p_feats, p_label
-
-
-
+        return p_coord, p_feats, p_label
