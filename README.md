@@ -60,14 +60,15 @@ Download [KITTI](http://www.semantic-kitti.org/dataset.html#download) inside the
 
 for pre-training
 
-you can just run train_stssl.py which is in tools, remember to modify the paramters of path :) 
+you can just run train_stssl.py which is in tools, remember to modify the paramters of path : ) 
 
 Then for fine-tuning:
 
-I will update fine-tune part as soon as possible.
+you can just run train_downstream.py which is in tools, remember to modify the paramters of path : ) 
 
-Before that, you can refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
+Of course, you can also refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
 
+Any questions, touch me at wuyanhao@stu.xjtu.edu.cn
 
 
 # Citation
