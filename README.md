@@ -10,7 +10,7 @@ Code is released, modify the 'epochs' to 'stop_epoch' in trainer.stssl_trainer
 *-----------------------------------------------------------------------------------* 
 
 
-**STSSL**
+**(STSSL) Spatiotemporal Self-supervised Learning for Point Clouds in the Wild **
 
 **[Paper](https://arxiv.org/pdf/2303.16235.pdf)** **|** **[Project page](https://yanhaowu.github.io/STSSL/)**
 
