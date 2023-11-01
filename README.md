@@ -64,7 +64,7 @@ you can just run train_stssl.py which is in tools, remember to modify the paramt
 
 Then for fine-tuning:
 
-you can just run train_downstream.py which is in tools, remember to modify the paramters of path : ) 
+you can just run train_downstream.py which is in tools, remember to adjust the learning rate: ) 
 
 Of course, you can also refer to **[SegContrast](https://github.com/PRBonn/segcontrast)**
 
