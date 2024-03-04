@@ -58,7 +58,7 @@ Download [KITTI](http://www.semantic-kitti.org/dataset.html#download) inside the
 
 # Reproducing the results
 
-for pre-training. (We use 8 RXT3090 GPUS for pre-training)
+for pre-training. (We use 8 RXT3090 GPUs for pre-training)
 
 you can just run train_stssl.py which is in tools, remember to modify the paramters of path : ) 
 
